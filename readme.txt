@@ -9,3 +9,5 @@ MySql: lokální
 - 'sa' password: ToKu2043
 - 'CashRegister' password: CR01
 - windows service name: MySQL80
+
+//"start": "node ./bin/www"
