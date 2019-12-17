@@ -11,3 +11,8 @@ MySql: lokální
 - windows service name: MySQL80
 
 //"start": "node ./bin/www"
+
+Knex:
+- https://gist.github.com/NigelEarle/70db130cc040cc2868555b29a0278261
+- knex migrate:make create_users_table
+- knex migrate:latest

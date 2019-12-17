@@ -1,3 +1,4 @@
+import knex from "knex";
 import mysql from "mysql";
 
 const params = {
@@ -10,6 +11,43 @@ const params = {
     database: "CashRegister",
 };
 
+const optionsKnex = {
+    client: "mysql2",
+    connection: {
+        database: params.database,
+        host: params.host,
+        password: params.pwd,
+        user: params.login,
+    },
+};
+
+/*
+const knexConnection = knex(optionsKnex);
+
+knexConnection.raw("SELECT VERSION()").then(
+    (version) => {
+        console.log("Version ", version);
+        console.log("Version wrapped", version[0][0]);
+    }).catch((err) => {
+        console.log("Error: ", err);
+        // throw err;
+    }).finally(() => {
+        knexConnection.destroy();
+    });
+
+const optionsKnexMigration = { ...optionsKnex };
+optionsKnexMigration.connection.database = "CashRegisterMigration";
+
+const knexConnectionMigration = knex(optionsKnexMigration);
+const migrate = async () => knexConnectionMigration.migrate.latest();
+migrate().then((parsMigration) => {
+    console.log("Migration finished [pars]: ", parsMigration);
+    console.log("Migration finished [options]: ", optionsKnexMigration);
+    knexConnectionMigration.seed.run().then((parsSeed) => {
+        console.log("Seed finished [pars]: ", parsSeed);
+    });
+});
+*/
 const getConnectionUri = (includeDbName: boolean = true): mysql.ConnectionConfig => {
     return {
         database: includeDbName ? params.database : undefined,

@@ -8,6 +8,8 @@ import path from "path";
 import indexRouter from "./routes/index";
 import testAPIRouter from "./routes/testAPI";
 import usersRouter from "./routes/users";
+import customerRouter from "./routes/customer";
+import licenseRouter from "./routes/license";
 
 import db from "./db/db";
 
@@ -28,6 +30,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/customer", customerRouter);
+app.use("/license", licenseRouter);
 app.use("/testAPI", testAPIRouter);
 
 // catch 404 and forward to error handler
@@ -36,6 +40,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
+/*
 app.use(
     (err: { status: any; },
      req: { app: { get: (arg0: string) => string; }; },
@@ -47,6 +52,12 @@ app.use(
   // render the error page
   res.status(err.status || 500);
   res.render("error");
+});
+*/
+const PORT = 9000;
+
+app.listen(PORT, () => {
+  console.log(`server running on port ${PORT}`);
 });
 
 module.exports = app;
