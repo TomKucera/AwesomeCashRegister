@@ -74,6 +74,12 @@ const AppUnconnected: React.FC<IAppDispatchToProps & IAppOwnProps> =
       >
         User List
       </Link>
+      <Link
+        to='/customers'
+      >
+        Customers
+      </Link>
+      
     </div>
   );
 }

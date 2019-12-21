@@ -2,6 +2,7 @@
 import express from "express";
 import license from "./../data/model/license";
 import licenseRepository from "./../data/repository/LicenseRepository";
+import { tryPromise } from "tarn/lib/utils";
 // tslint:disable: object-literal-sort-keys
 
 const router = express.Router();
@@ -63,8 +64,6 @@ router.get("/:id", (req, res) => {
   }
   */
 
-  
-  
   /*
     return res.status(201).send({
      success: "true",
@@ -73,6 +72,6 @@ router.get("/:id", (req, res) => {
    });
    */
 
-//});
+// });
 
 export default router;

@@ -4,13 +4,13 @@ import {
     IUserActionTypes
 } from './UserTypes';
 
-const INITIAL_STATE: IUser = {
+export const INITIAL_STATE_USER: IUser = {
     username: undefined,
     userMessage: undefined,
     friendList: undefined
 }
 
-export function userReducer(prevState: IUser = INITIAL_STATE, action: IUserActionTypes) {
+export function userReducer(prevState: IUser = INITIAL_STATE_USER, action: IUserActionTypes) {
     switch (action.type) {
         case UserActions.SAVE_USERNAME:
             return {

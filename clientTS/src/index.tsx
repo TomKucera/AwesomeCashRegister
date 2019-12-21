@@ -7,6 +7,8 @@ import './index.css';
 //import AppUnconnected from './App';
 import { App } from './App';
 import { UserList } from './UserList';
+import { CustomerList } from './modules/customer/containers/CustomerList';
+
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
@@ -24,6 +26,13 @@ ReactDOM.render(
                     exact
                     path='/userlist'
                     render={(props) => <UserList {...props} />}
+                />
+            </Switch>
+            <Switch>
+                <Route
+                    exact
+                    path='/customers'
+                    render={(props) => <CustomerList {...props} />}
                 />
             </Switch>
         </BrowserRouter>
