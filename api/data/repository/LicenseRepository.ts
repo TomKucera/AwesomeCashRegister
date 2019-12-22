@@ -1,6 +1,6 @@
+import dataSet from "./../../db/CrMaster/license";
 import License from "./../model/license";
 import ILicenseRepository from "./interface/ILicenseRepository";
-import dataSet from "./../../db/CrMaster/license";
 
 const LicenseRepository: ILicenseRepository = {
 
@@ -12,16 +12,16 @@ const LicenseRepository: ILicenseRepository = {
         });
     },
 
-    Create: (data: License): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
+    Create: (data: License): Promise<number> => {
+        return new Promise<number>((resolve, reject) => {
             dataSet.create(data).then((v) => {
-                resolve();
+                resolve(v);
             });
         });
     },
 
-    Update: (data: License): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
+    Update: (data: License): Promise<License> => {
+        return new Promise<License>((resolve, reject) => {
             resolve();
         });
     },

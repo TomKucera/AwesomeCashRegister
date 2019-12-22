@@ -9,14 +9,14 @@ const UserRepository: IUserRepository = {
         });
     },
 
-    Create: (data: User): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
+    Create: (data: User): Promise<number> => {
+        return new Promise<number>((resolve, reject) => {
             resolve();
         });
     },
 
-    Update: (data: User): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
+    Update: (data: User): Promise<User> => {
+        return new Promise<User>((resolve, reject) => {
             resolve();
         });
     },

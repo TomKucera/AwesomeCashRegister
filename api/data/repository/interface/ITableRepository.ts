@@ -9,13 +9,13 @@ export default interface ITableRepository<TModel, TKey> {
     /// Creates entity.
     /// </summary>
     /// <param name="entity">Entity to create</param>
-    Create(data: TModel): Promise<void>;
+    Create(data: TModel): Promise<number>;
 
     /// <summary>
     /// Updates entity.
     /// </summary>
     /// <param name="entity">Entity to update.</param>
-    Update(data: TModel): Promise<void>;
+    Update(data: TModel): Promise<TModel>;
 
     /// <summary>
     /// Deletes entity.

@@ -1,8 +1,7 @@
-// import knex from "knex";
-import mCustomer from "./../../data/model/customer";
+// tslint:disable: ordered-imports
 import connection from "./connection";
 import connectionCustom from "./../CrCustom/connection";
-// tslint:disable: object-literal-sort-keys
+import mCustomer from "./../../data/model/customer";
 
 class Customer {
 
@@ -27,11 +26,31 @@ class Customer {
         });
     }
 
+    public static edit(customer: mCustomer): Promise<mCustomer> {
+        return new Promise<mCustomer>((resolve, reject) => {
+            connection("customer").where("id", customer.id).update({
+                name: customer.name,
+                login: customer.login,
+                password: customer.password,
+                updated: connection.fn.now(),
+            }).then((count) => {
+                console.log("edit customer [customer, rows] ", customer, count);
+                if (count === 1) {
+                    this.getById(customer.id).then((row) => {
+                        resolve(row);
+                    });
+                } else {
+                    reject(count);
+                }
+            });
+        });
+    }
+
     public static getById(id: number): Promise<mCustomer> {
         return new Promise<mCustomer>((resolve, reject) => {
             connection("customer").where("id", id).then((rows) => {
                 if (rows.length === 1) {
-                    //resolve(rows[0]);
+                    // resolve(rows[0]);
                     const dbName = connectionCustom.genDbName(id);
                     connectionCustom.checkDb(dbName).then(() => {
                         resolve(rows[0]);

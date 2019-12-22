@@ -12,13 +12,23 @@ router.post("/", (req, res) => {
   customerRepository.Create(req.body).then((customerData) => {
     res.status(201).send(customerData);
   });
+});
 
+router.put("/:id", (req, res) => {
+  // res.render("respond with a resource");
+  console.log("customer put [req]: ", req);
+  const id = parseInt(req.params.id, 10);
+  const data = { ...req.body, id };
+  customerRepository.Update(data).then((customerData) => {
+    res.status(201).send(customerData);
+  });
 });
 
 router.get("/:id", (req, res) => {
   console.log("customer getById [req.params]: ", req.params);
   const id = parseInt(req.params.id, 10);
   customerRepository.GetById(id).then((customerData: customer) => {
+    console.log("customer put [customerData]: ", customerData);
     res.status(200).send(customerData);
   });
 });

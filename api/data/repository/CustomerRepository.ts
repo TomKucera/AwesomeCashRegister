@@ -1,6 +1,6 @@
+import dataSet from "./../../db/CrMaster/customer";
 import Customer from "./../model/customer";
 import ICustomerRepository from "./interface/ICustomerRepository";
-import dataSet from "./../../db/CrMaster/customer";
 
 const CustomerRepository: ICustomerRepository = {
 
@@ -12,17 +12,19 @@ const CustomerRepository: ICustomerRepository = {
         });
     },
 
-    Create: (data: Customer): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
-            dataSet.create(data.login, data.name, data.password ).then((v) => {
-                resolve();
+    Create: (data: Customer): Promise<number> => {
+        return new Promise<number>((resolve, reject) => {
+            dataSet.create(data.login, data.name, data.password ).then((id) => {
+                resolve(id);
             });
         });
     },
 
-    Update: (data: Customer): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
-            resolve();
+    Update: (data: Customer): Promise<Customer> => {
+        return new Promise<Customer>((resolve, reject) => {
+            dataSet.edit(data).then((row) => {
+                resolve(row);
+            });
         });
     },
 
