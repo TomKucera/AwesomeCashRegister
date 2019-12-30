@@ -28,6 +28,7 @@ class Customer {
 
     public static edit(customer: mCustomer): Promise<mCustomer> {
         return new Promise<mCustomer>((resolve, reject) => {
+            console.log("edit customer before [customer] ", customer);
             connection("customer").where("id", customer.id).update({
                 name: customer.name,
                 login: customer.login,

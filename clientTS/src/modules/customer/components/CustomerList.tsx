@@ -43,7 +43,7 @@ export const CustomerList: React.FC<IComponentProps> =
                 {customers.map((c) =>
                 <tr>
                     <td>{c.id}</td>
-                    <td>{c.name}</td>
+                    <td><Link to={`/customers/${c.id}`}>{c.name}</Link></td>
                     <td>{c.created}</td>
                     <td>{c.updated}</td>
                 </tr>)}

@@ -19,6 +19,7 @@ router.put("/:id", (req, res) => {
   console.log("customer put [req]: ", req);
   const id = parseInt(req.params.id, 10);
   const data = { ...req.body, id };
+  console.log("customer put [req.body]: ", req.body);
   customerRepository.Update(data).then((customerData) => {
     res.status(201).send(customerData);
   });

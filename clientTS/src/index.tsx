@@ -8,6 +8,7 @@ import './index.css';
 import { App } from './App';
 import { UserList } from './UserList';
 import { CustomerList } from './modules/customer/containers/CustomerList';
+import { CustomerEdit } from './modules/customer/containers/CustomerEdit';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -33,6 +34,13 @@ ReactDOM.render(
                     exact
                     path='/customers'
                     render={(props) => <CustomerList {...props} />}
+                />
+            </Switch>
+            <Switch>
+                <Route
+                    exact
+                    path='/customers/:customerId'
+                    render={(props) => <CustomerEdit {...props} />}
                 />
             </Switch>
         </BrowserRouter>

@@ -14,7 +14,7 @@ callAPI() {
         .then(res => this.setState({ apiResponse: res }));
 };
 componentWillMount() {
-    this.callAPI();
+    //this.callAPI();
 };
 
 render() {

@@ -4,6 +4,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { IAppState } from './../../../store/RootReducer';
 import { ICustomer } from './../../../model/types';
 import { CustomerList as component } from './../components/CustomerList';
+import { getCustomers }from './../store/CustomerSelectors';
 
 import { loadCustomers } from './../store/CustomerActions';
 
@@ -25,7 +26,7 @@ const mapStateToProps: MapStateToProps<
     IOwnProps,
     IAppState
 > = (state: IAppState, ownProps: IOwnProps): IStateProps => ({
-    customers: state.customer.customers,
+    customers: getCustomers(state.customer),
     loading: state.customer.loading,
     ...ownProps
 });
