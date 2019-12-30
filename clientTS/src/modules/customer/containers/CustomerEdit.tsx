@@ -26,7 +26,6 @@ interface IStateProps {
 
 interface IDispatchProps {
     loadCustomer: () => void,
-    //editCustomer: (customer: ICustomer) => Promise<void>,
     saveCustomer: (customer: ICustomer) => Promise<boolean>,
 }
 

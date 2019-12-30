@@ -46,7 +46,7 @@ export const CustomerEdit: React.FC<IComponentProps> =
     }, [load, loadCustomer]);
 
     useEffect(() => {
-        if (name.length == 0) {
+        if (name.length === 0) {
             console.log('useEffect cust [customer, name] ', customer, name);
             setName(customer.name);
         }
@@ -61,7 +61,7 @@ export const CustomerEdit: React.FC<IComponentProps> =
             alert('Invalid name');
             return;
         }
-        if (name == customer.name) {
+        if (name === customer.name) {
             alert('No change');
             return;
         }

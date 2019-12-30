@@ -39,15 +39,17 @@ export const CustomerList: React.FC<IComponentProps> =
         }
 
         return (
-            <tbody>
-                {customers.map((c) =>
-                <tr>
-                    <td>{c.id}</td>
-                    <td><Link to={`/customers/${c.id}`}>{c.name}</Link></td>
-                    <td>{c.created}</td>
-                    <td>{c.updated}</td>
-                </tr>)}
-            </tbody>
+            <table>
+                <tbody>
+                    {customers.map((c) =>
+                    <tr key={c.id.toString()}>
+                        <td>{c.id}</td>
+                        <td><Link to={`/customers/${c.id}`}>{c.name}</Link></td>
+                        <td>{c.created}</td>
+                        <td>{c.updated}</td>
+                    </tr>)}
+                </tbody>
+            </table>
         );
     };
 

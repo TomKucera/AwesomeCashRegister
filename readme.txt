@@ -28,3 +28,6 @@ yarn add redux react-redux @types/react-redux       [přidání typů pro 'react
 
 yarn add redux-thunk redux-devtools
 ------------------------------------------------------------------------------------------
+
+TODO: BE - debuging při použití nodemon:
+https://medium.com/create-a-server-with-nodemon-express-typescript/create-a-server-with-nodemon-express-typescript-f7c88fb5ee71
