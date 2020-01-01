@@ -12,6 +12,7 @@ class License {
                 licenseCode: license.licenseCode,
                 licenseKey: license.licenseKey,
             }).then((rows) => {
+                console.log("Create license rows ", rows);
                 if (rows.length === 1) {
                     resolve(rows[0]);
                 } else {
@@ -36,6 +37,15 @@ class License {
     public static getList(): Promise<mLicense[]> {
         return new Promise<mLicense[]>((resolve, reject) => {
             connection("license").then((rows) => {
+                resolve(rows);
+            });
+        });
+    }
+
+    public static getByCustomerId(customerId: number): Promise<mLicense[]> {
+        return new Promise<mLicense[]>((resolve, reject) => {
+            connection("license").where("idCustomer", customerId).then((rows) => {
+                console.log("getByCustomerId customerId, rows ", customerId, rows);
                 resolve(rows);
             });
         });

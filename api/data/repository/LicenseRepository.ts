@@ -14,6 +14,7 @@ const LicenseRepository: ILicenseRepository = {
 
     Create: (data: License): Promise<number> => {
         return new Promise<number>((resolve, reject) => {
+            console.log("Create license ", data);
             dataSet.create(data).then((v) => {
                 resolve(v);
             });
@@ -35,6 +36,14 @@ const LicenseRepository: ILicenseRepository = {
     GetList: (): Promise<License[]> => {
         return new Promise<License[]>((resolve, reject) => {
             dataSet.getList().then((rows) => {
+                resolve(rows);
+            });
+        });
+    },
+
+    GetByCustomerId: (customerId: number): Promise<License[]> => {
+        return new Promise<License[]>((resolve, reject) => {
+            dataSet.getByCustomerId(customerId).then((rows) => {
                 resolve(rows);
             });
         });

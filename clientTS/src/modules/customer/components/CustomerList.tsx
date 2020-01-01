@@ -7,6 +7,8 @@ import { ICustomer } from './../../../model/types';
 const CenterContent = styled.div`
     text-align: center;
     background-color: green;
+    margin: auto;
+    width: 50%;
 `;
 
 interface iProps {

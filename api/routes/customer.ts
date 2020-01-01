@@ -2,6 +2,10 @@
 import express from "express";
 import customer from "./../data/model/customer";
 import customerRepository from "./../data/repository/CustomerRepository";
+
+// import license from "./../data/model/license";
+import licenseRepository from "./../data/repository/LicenseRepository";
+
 // tslint:disable: object-literal-sort-keys
 
 const router = express.Router();
@@ -40,6 +44,16 @@ router.get("/", (req, res, next) => {
     res.status(201).send(customers);
   });
 });
+
+router.get("/:id/licenses", (req, res) => {
+  console.log("customer getLicensesByCustId [req.params]: ", req.params);
+  const id = parseInt(req.params.id, 10);
+  licenseRepository.GetByCustomerId(id).then((licenses) => {
+    res.status(200).send(licenses);
+  });
+});
+
+// /1/documents
 
 /*
 // GET home page.
