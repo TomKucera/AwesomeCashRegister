@@ -31,3 +31,12 @@ yarn add redux-thunk redux-devtools
 
 TODO: BE - debuging při použití nodemon:
 https://medium.com/create-a-server-with-nodemon-express-typescript/create-a-server-with-nodemon-express-typescript-f7c88fb5ee71
+
+
+NEXT CHALLENGEs:
+- specifikovat ve SWAGGERu primitivní API (stačí pro entitu 'Customer')
+- vygenerovat ze SWAGGERu a zaimplementovat jej do API (serverové) části
+- otestovat funkčnost (PostMan + FE)
+- nasadit aplikaci (AWS/Azure)
+- zkusit implementovat API v GoLang (dát do nové části 'API_GO')
+- zahrnout testy do API i Clienta (Jest, Cypress, ... ?)

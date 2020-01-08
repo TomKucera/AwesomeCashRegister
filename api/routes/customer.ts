@@ -45,6 +45,7 @@ router.get("/", (req, res, next) => {
   });
 });
 
+// TODO test
 router.get("/:id/licenses", (req, res) => {
   console.log("customer getLicensesByCustId [req.params]: ", req.params);
   const id = parseInt(req.params.id, 10);
