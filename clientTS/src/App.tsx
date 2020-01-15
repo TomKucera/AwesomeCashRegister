@@ -10,6 +10,7 @@ import './App.css';
 import { IUser } from './store/user/UserTypes';
 import { IAppState } from './store/RootReducer';
 
+
 interface IAppOwnProps {
   username: string | undefined;
   userType: 'admin' | 'moderator' | 'user' | 'guest';
@@ -19,6 +20,10 @@ interface IAppDispatchToProps {
   saveUsername: (user: IUser) => void;
   saveUserMessage: (user: IUser) => void;
 }
+
+
+
+
 
 const AppUnconnected: React.FC<IAppDispatchToProps & IAppOwnProps> = 
 ({ 
@@ -78,8 +83,7 @@ const AppUnconnected: React.FC<IAppDispatchToProps & IAppOwnProps> =
         to='/customers'
       >
         Customers
-      </Link>
-      
+      </Link> 
     </div>
   );
 }

@@ -3,11 +3,17 @@ import { ThunkDispatch } from 'redux-thunk';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { IAppState } from '../../../store/RootReducer';
 import { ICustomer } from '../../../model/types';
-import { IComponentProps, CustomerEdit as component } from '../components/CustomerEdit';
+//import {CustomerEdit as component} from './../components/CustomerEdit';
+import CustomerEditNext from './../components/CustomerEditNext';
 
-import { getCustomerById, emptyCustomer }from './../store/CustomerSelectors';
+import { getCustomerById }from './../store/CustomerSelectors';
 
-import { loadCustomer, saveCustomer } from '../store/CustomerActions';
+import { loadCustomer, saveCustomer, createCustomer } from '../store/CustomerActions';
+import {emptyCustomer} from 'src/model/empty';
+
+let component = CustomerEditNext;
+
+
 /*
 import { ICustomerActionTypes } from '../store/CustomerTypes';
 import { resolve } from 'q';
@@ -15,12 +21,13 @@ import { resolve } from 'q';
 import {IFinishEditCustomerAction} from './../store/CustomerTypes';
 */
 interface IOwnProps {
-    
+    customerId?: number
 }
 
 interface IStateProps {
     loading: boolean,
-	editing: boolean,
+    editing: boolean,
+    customerId?: number,
 	customer: ICustomer,
 }
 
@@ -34,9 +41,11 @@ const mapStateToProps: MapStateToProps<
     IOwnProps,
     IAppState
 > = (state: IAppState, ownProps: IOwnProps): IStateProps => {
-    const params = (ownProps as any).match.params;
+
+    
     return {
-        customer: getCustomerById(state.customer, params.customerId) || emptyCustomer,
+        customerId: ownProps.customerId,
+        customer: ownProps.customerId ? getCustomerById(state.customer, ownProps.customerId) || emptyCustomer : emptyCustomer,
         loading: state.customer.loading,
         editing: state.customer.editing,
         ...ownProps
@@ -48,11 +57,18 @@ const mapDispatchToProps: MapDispatchToProps<
     IOwnProps
 > = (dispatch: ThunkDispatch<{}, {}, AnyAction>, ownProps: IOwnProps) => ({
     loadCustomer: () => {
-        const params = (ownProps as any).match.params;
-        dispatch(loadCustomer(params.customerId));
+        console.log("mapDispatchToProps params.customerId", ownProps.customerId);
+        if (ownProps.customerId){
+            dispatch(loadCustomer(ownProps.customerId));
+        }
     },
     saveCustomer: (customer: ICustomer): Promise<boolean> => {
-        return dispatch(saveCustomer(customer));
+        if (ownProps.customerId){
+            return dispatch(saveCustomer(customer));
+        }
+        else{
+            return dispatch(createCustomer(customer));
+        }        
     },
 });
 

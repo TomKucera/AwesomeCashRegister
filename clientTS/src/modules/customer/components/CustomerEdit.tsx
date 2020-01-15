@@ -3,7 +3,7 @@ import React, { useEffect, useState, ChangeEvent } from 'react';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ICustomer } from '../../../model/types';
+import { ICustomer } from './../../../model/types';
 
 const CenterContent = styled.div`
     text-align: center;

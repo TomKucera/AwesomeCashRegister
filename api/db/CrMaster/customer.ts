@@ -6,6 +6,8 @@ import mCustomer from "./../../data/model/customer";
 class Customer {
 
     public static create(login: string, name: string, password: string): Promise<number> {
+
+        console.log("Customer.create ", login, name, password)
         return new Promise<number>((resolve, reject) => {
             connection("customer").insert({
                 name,

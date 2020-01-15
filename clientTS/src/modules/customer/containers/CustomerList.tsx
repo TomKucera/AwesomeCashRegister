@@ -3,10 +3,13 @@ import { ThunkDispatch } from 'redux-thunk';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { IAppState } from './../../../store/RootReducer';
 import { ICustomer } from './../../../model/types';
-import { CustomerList as component } from './../components/CustomerList';
+//import { CustomerList as component } from './../components/CustomerList';
+import CustomerListNext from './../components/CustomerListNext';
 import { getCustomers }from './../store/CustomerSelectors';
 
 import { loadCustomers } from './../store/CustomerActions';
+
+let component = CustomerListNext;
 
 interface IOwnProps {
 

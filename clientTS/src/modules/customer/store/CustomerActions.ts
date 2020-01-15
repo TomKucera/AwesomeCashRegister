@@ -153,6 +153,26 @@ export function saveCustomer(customer: ICustomer) {
         }
     };
 };
+
+export function createCustomer(customer: ICustomer) {
+    return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<boolean> => {
+        dispatch(getActionStartEdit())
+        try {
+            console.log('create customer ', customer);
+            const url = 'http://localhost:9000/customer/';
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            const response = await fetch(url, { method: 'POST', body: JSON.stringify(customer), headers });
+            const respCustomer: ICustomer = await response.json();
+            dispatch(getActionFinishEdit(respCustomer, undefined));
+            return true;
+        } catch (error) {
+            dispatch(getActionFinishEdit(undefined, error));
+            return false;
+        }
+    };
+};
 /*
 
 
