@@ -78,7 +78,7 @@ const useStyles = makeStyles({
         width: '60%',
         margin: "auto",
     },
-    fab:{
+    fab: {
         float: "right"
     }
 });
@@ -124,12 +124,12 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
     };
 
     return (
-        <div className={classes.div}> 
+        <div className={classes.div}>
             <label className={classes.label}>Customers</label>
-            <Fab className={classes.fab}  size="small" color="primary" aria-label="add" onClick={handleAdd}>
-        <AddIcon />
-      </Fab>
-      
+            <Fab className={classes.fab} size="small" color="primary" aria-label="add" onClick={handleAdd}>
+                <AddIcon />
+            </Fab>
+
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">

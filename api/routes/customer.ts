@@ -6,6 +6,8 @@ import customerRepository from "./../data/repository/CustomerRepository";
 // import license from "./../data/model/license";
 import licenseRepository from "./../data/repository/LicenseRepository";
 
+import { send } from "./../common/post";
+
 // tslint:disable: object-literal-sort-keys
 
 const router = express.Router();
@@ -13,8 +15,12 @@ const router = express.Router();
 router.post("/", (req, res) => {
   // res.render("respond with a resource");
   console.log("customer post [req]: ", req);
+
+  //status(201)
   customerRepository.Create(req.body).then((customerData) => {
-    res.status(201).send(customerData);
+    console.log("customer post [customerData]: ", customerData);
+    res.sendStatus(201).send(customerData);
+    
   });
 });
 
@@ -26,6 +32,7 @@ router.put("/:id", (req, res) => {
   console.log("customer put [req.body]: ", req.body);
   customerRepository.Update(data).then((customerData) => {
     res.status(201).send(customerData);
+    send("Customer PUT", JSON.stringify(customerData) );
   });
 });
 
@@ -35,6 +42,14 @@ router.get("/:id", (req, res) => {
   customerRepository.GetById(id).then((customerData: customer) => {
     console.log("customer put [customerData]: ", customerData);
     res.status(200).send(customerData);
+  });
+});
+
+router.delete("/:id", (req, res) => {
+  console.log("customer deleteById [req.params]: ", req.params);
+  const id = parseInt(req.params.id, 10);
+  customerRepository.Delete(id).then(() => {
+    res.status(200).send(`Customer [id: ${id}] deleted`);
   });
 });
 

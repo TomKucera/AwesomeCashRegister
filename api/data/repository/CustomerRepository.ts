@@ -30,7 +30,9 @@ const CustomerRepository: ICustomerRepository = {
 
     Delete: (id: number): Promise<void> => {
         return new Promise<void>((resolve, reject) => {
-            resolve();
+            dataSet.deleteById(id).then(() => {
+                resolve();
+            });
         });
     },
 

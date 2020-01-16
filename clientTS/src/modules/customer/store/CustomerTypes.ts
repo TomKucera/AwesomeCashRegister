@@ -9,6 +9,9 @@ export const CustomerActions = {
 
     START_EDIT: 'START_EDIT_CUSTOMER',
     FINISH_EDIT: 'FINISH_EDIT_CUSTOMER',
+
+    START_DELETE: 'START_DELETE_CUSTOMER',
+    FINISH_DELETE: 'FINISH_DELETE_CUSTOMER',
 }
 
 export interface IStartLoadCustomersAction {
@@ -37,9 +40,21 @@ export interface IFinishEditCustomerAction {
     serverError?: any,
 }
 
+export interface IStartDeleteCustomerAction {
+    type: typeof CustomerActions.START_DELETE,
+}
+
+export interface IFinishDeleteCustomerAction {
+    type: typeof CustomerActions.FINISH_DELETE,
+    customerId: number,
+    serverError?: any,
+}
+
 export type ICustomerActionTypes =
 IStartLoadCustomersAction |
 IFinishLoadCustomersAction |
 IStartEditCustomerAction |
-IFinishEditCustomerAction
+IFinishEditCustomerAction |
+IStartDeleteCustomerAction |
+IFinishDeleteCustomerAction
 ;

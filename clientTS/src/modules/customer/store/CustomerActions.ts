@@ -49,6 +49,21 @@ export function getActionFinishEdit(customer?: ICustomer, serverError?: any): IC
     };
 }
 
+export function getActionStartDelete(): ICustomerActionTypes {
+    return {
+        type: CustomerActions.START_DELETE,
+    };
+}
+
+export function getActionFinishDelete(id: number, serverError?: any): ICustomerActionTypes {
+    return {
+        type: CustomerActions.FINISH_DELETE,
+        customerId: id,
+        serverError 
+    };
+}
+
+
 export function loadCustomers() {
     return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<void> => {
         return new Promise<void>(async (resolve) => {
@@ -84,55 +99,6 @@ export function loadCustomer(customerId: number) {
         });
     };
 };
-
-
-/*
-export function loadCustomer(customerId: number) {
-    return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<ICustomerActionTypes> => {
-        return new Promise<ICustomerActionTypes>(async (resolve, reject) => {
-            await dispatch(getActionStartLoadCustomer())
-            try {
-                console.log('loadCustomer');
-                const url = 'http://localhost:9000/customer/' + customerId.toString();
-                const response = await fetch(url, { method: 'GET' });
-                const customer = await response.json();
-                const action = getActionFinishLoadCustomer(customer, undefined);
-                resolve(await dispatch(action));
-            } catch (error) {
-                const action = await dispatch(getActionFinishLoadCustomer(undefined, error));
-                reject(action);
-            }
-        });
-    };
-};
-
-export function editCustomer(customer: ICustomer) {
-    return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<ICustomer> => {
-        return new Promise<ICustomer>(async (resolve) => {
-            dispatch(getActionStartEdit())
-            try {
-                console.log('update customer ', customer);
-                const url = 'http://localhost:9000/customer/' + customer.id.toString();
-                const response = await fetch(url, { method: 'PUT' });
-                const respCustomer: ICustomer = await response.json();
-                dispatch(getActionFinishEdit(respCustomer, undefined));
-            } catch (error) {
-                dispatch(getActionFinishEdit(undefined, error));
-            }
-        });
-    };
-};
-*/
-
-/*
-return fetch('http://api.symfony-3.dev/app_dev.php/posts/' + id, {
-    method: 'PUT',
-    mode: 'CORS',
-    body: JSON.stringify(data),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-*/
 
 export function saveCustomer(customer: ICustomer) {
     return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<boolean> => {
@@ -173,6 +139,28 @@ export function createCustomer(customer: ICustomer) {
         }
     };
 };
+
+export function deleteCustomer(customerId: number) {
+    return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<boolean> => {
+        return new Promise<boolean>(async (resolve) => {
+            dispatch(getActionStartDelete())
+            try {
+                console.log('deleteCustomer');
+                const url = 'http://localhost:9000/customer/' + customerId.toString();
+                const response = await fetch(url, { method: 'DELETE' });
+                //const customer = await response.json();
+                dispatch(getActionFinishDelete(customerId, undefined));
+                resolve(true);
+                //return true;
+            } catch (error) {
+                dispatch(getActionFinishDelete(customerId, error));
+                resolve(false);
+                //return false;
+            }
+        });
+    };
+};
+
 /*
 
 

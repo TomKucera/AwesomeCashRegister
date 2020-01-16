@@ -3,7 +3,8 @@ import {
     IFinishLoadCustomersAction,
     IFinishLoadCustomerAction,
     IFinishEditCustomerAction,
-    ICustomerActionTypes
+    ICustomerActionTypes,
+    IFinishDeleteCustomerAction
 } from './CustomerTypes';
 
 import { ICustomer } from './../../../model/types';
@@ -12,7 +13,7 @@ export interface IStoreCustomer {
     loading: boolean,
     editing: boolean,
     customers: Array<ICustomer>,
-    customersData: { [id: number] : ICustomer; },
+    customersData: { [id: number]: ICustomer; },
     serverError?: any,
 }
 
@@ -23,9 +24,15 @@ export const INITIAL_STATE_CUSTOMER: IStoreCustomer = {
     customersData: {},
 }
 
-function updateCustomer(source: { [id: number] : ICustomer; }, customer: ICustomer): { [id: number] : ICustomer; } {
+function updateCustomer(source: { [id: number]: ICustomer; }, customer: ICustomer): { [id: number]: ICustomer; } {
     const result = { ...source };
     result[customer.id] = customer;
+    return result;
+};
+
+function deleteCustomer(source: { [id: number]: ICustomer; }, customerId: number): { [id: number]: ICustomer; } {
+    const result = { ...source };
+    //result[customerId] = undefined;
     return result;
 };
 
@@ -53,8 +60,8 @@ export function customerReducer(prevState: IStoreCustomer = INITIAL_STATE_CUSTOM
 
         case CustomerActions.FINISH_LOAD_CUSTOMER:
             const customer = (action as IFinishLoadCustomerAction).customer;
-            const customersData = {...prevState.customersData};
-            if (customer){
+            const customersData = { ...prevState.customersData };
+            if (customer) {
                 customersData[customer.id] = customer;
             }
             return {
@@ -76,6 +83,18 @@ export function customerReducer(prevState: IStoreCustomer = INITIAL_STATE_CUSTOM
                 editing: false,
                 customersData: updateCustomer(prevState.customersData, (action as IFinishEditCustomerAction).customer),
                 serverError: (action as IFinishEditCustomerAction).serverError,
+            };
+        case CustomerActions.START_DELETE:
+            return {
+                ...prevState,
+                editing: true,
+            };    
+        case CustomerActions.FINISH_DELETE:
+            return {
+                ...prevState,
+                editing: false,
+                customersData: deleteCustomer(prevState.customersData, (action as IFinishDeleteCustomerAction).customerId),
+                serverError: (action as IFinishDeleteCustomerAction).serverError,
             };
         default:
             return prevState;

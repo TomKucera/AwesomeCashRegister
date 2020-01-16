@@ -8,7 +8,7 @@ import CustomerEditNext from './../components/CustomerEditNext';
 
 import { getCustomerById }from './../store/CustomerSelectors';
 
-import { loadCustomer, saveCustomer, createCustomer } from '../store/CustomerActions';
+import { loadCustomer, saveCustomer, createCustomer, deleteCustomer } from '../store/CustomerActions';
 import {emptyCustomer} from 'src/model/empty';
 
 let component = CustomerEditNext;
@@ -34,6 +34,7 @@ interface IStateProps {
 interface IDispatchProps {
     loadCustomer: () => void,
     saveCustomer: (customer: ICustomer) => Promise<boolean>,
+    deleteCustomer: (customerId: number)  => Promise<boolean>,
 }
 
 const mapStateToProps: MapStateToProps<
@@ -69,6 +70,9 @@ const mapDispatchToProps: MapDispatchToProps<
         else{
             return dispatch(createCustomer(customer));
         }        
+    },
+    deleteCustomer: (customerId: number): Promise<boolean> => {
+        return dispatch(deleteCustomer(customerId));
     },
 });
 

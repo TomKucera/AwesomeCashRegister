@@ -46,3 +46,7 @@ Path aliases nastavit v ts.config:
       //"@app-model-types": ["src/model/types"],
       "@model/*": ["src/model/*"]
     },
+
+Zasílání emailů z BE:
+- npm install nodemailer
+- https://www.w3schools.com/nodejs/nodejs_email.asp

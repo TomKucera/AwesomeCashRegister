@@ -67,8 +67,20 @@ class Customer {
 
     public static getList(): Promise<mCustomer[]> {
         return new Promise<mCustomer[]>((resolve, reject) => {
-            connection("customer").then((rows) => {
+            connection("customer").where("isDeleted", false).then((rows) => {
                 resolve(rows);
+            });
+        });
+    }
+
+    public static deleteById(id: number): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            console.log("delete customer before [id] ", id);
+            connection("customer").where("id", id).update({
+                isDeleted: true,
+                updated: connection.fn.now(),
+            }).then((count) => {
+                resolve();
             });
         });
     }
