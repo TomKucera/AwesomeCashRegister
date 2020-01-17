@@ -4,11 +4,9 @@ import connectionCustom from "./../CrCustom/connection";
 import mCustomer from "./../../data/model/customer";
 
 class Customer {
-
-    public static create(login: string, name: string, password: string): Promise<number> {
-
+    public static create(login: string, name: string, password: string): Promise<mCustomer> {
         console.log("Customer.create ", login, name, password)
-        return new Promise<number>((resolve, reject) => {
+        return new Promise<mCustomer>((resolve, reject) => {
             connection("customer").insert({
                 name,
                 regId: "",
@@ -19,7 +17,9 @@ class Customer {
                 if (rows.length === 1) {
                     const dbName = connectionCustom.genDbName(rows[0]);
                     connectionCustom.checkDb(dbName).then(() => {
-                        resolve(rows[0]);
+                        this.getById(rows[0]).then((row) => {
+                            resolve(row);
+                        });
                     });
                 } else {
                     reject(rows);

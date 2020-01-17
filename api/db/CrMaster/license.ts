@@ -5,8 +5,8 @@ import connection from "./connection";
 
 class License {
 
-    public static create(license: mLicense): Promise<number> {
-        return new Promise<number>((resolve, reject) => {
+    public static create(license: mLicense): Promise<mLicense> {
+        return new Promise<mLicense>((resolve, reject) => {
             connection("license").insert({
                 idCustomer: license.idCustomer,
                 licenseCode: license.licenseCode,
@@ -14,7 +14,9 @@ class License {
             }).then((rows) => {
                 console.log("Create license rows ", rows);
                 if (rows.length === 1) {
-                    resolve(rows[0]);
+                    this.getById(rows[0]).then((row) => {
+                        resolve(row);
+                    });
                 } else {
                     reject(rows);
                 }

@@ -7,15 +7,17 @@ const CustomerRepository: ICustomerRepository = {
     GetById: (id: number): Promise<Customer> => {
         return new Promise<Customer>((resolve, reject) => {
             dataSet.getById(id).then((row) => {
+                console.log("GetById row", row);
                 resolve(row);
             });
         });
     },
 
-    Create: (data: Customer): Promise<number> => {
-        return new Promise<number>((resolve, reject) => {
-            dataSet.create(data.login, data.name, data.password ).then((id) => {
-                resolve(id);
+    Create: (data: Customer): Promise<Customer> => {
+        return new Promise<Customer>((resolve, reject) => {
+            dataSet.create(data.login, data.name, data.password ).then((row) => {
+                console.log("created row", row);
+                resolve(row);
             });
         });
     },

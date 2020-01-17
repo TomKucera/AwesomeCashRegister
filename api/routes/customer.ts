@@ -13,19 +13,16 @@ import { send } from "./../common/post";
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  // res.render("respond with a resource");
   console.log("customer post [req]: ", req);
 
   //status(201)
   customerRepository.Create(req.body).then((customerData) => {
     console.log("customer post [customerData]: ", customerData);
-    res.sendStatus(201).send(customerData);
-    
+    res.status(201).send(customerData);
   });
 });
 
 router.put("/:id", (req, res) => {
-  // res.render("respond with a resource");
   console.log("customer put [req]: ", req);
   const id = parseInt(req.params.id, 10);
   const data = { ...req.body, id };

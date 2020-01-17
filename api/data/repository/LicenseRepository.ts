@@ -12,11 +12,11 @@ const LicenseRepository: ILicenseRepository = {
         });
     },
 
-    Create: (data: License): Promise<number> => {
-        return new Promise<number>((resolve, reject) => {
+    Create: (data: License): Promise<License> => {
+        return new Promise<License>((resolve, reject) => {
             console.log("Create license ", data);
-            dataSet.create(data).then((v) => {
-                resolve(v);
+            dataSet.create(data).then((row) => {
+                resolve(row);
             });
         });
     },

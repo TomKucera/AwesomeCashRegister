@@ -9,8 +9,8 @@ const UserRepository: IUserRepository = {
         });
     },
 
-    Create: (data: User): Promise<number> => {
-        return new Promise<number>((resolve, reject) => {
+    Create: (data: User): Promise<User> => {
+        return new Promise<User>((resolve, reject) => {
             resolve();
         });
     },
