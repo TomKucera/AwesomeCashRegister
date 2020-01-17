@@ -6,14 +6,12 @@ import EditIcon from '@material-ui/icons/Edit';
 //import { layoutType } from './../model/types';
 
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { green, purple, blueGrey, lightGreen } from '@material-ui/core/colors';
+import { green, lightGreen } from '@material-ui/core/colors';
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 
 const styles = {
     content:{
-
         margin: 50
-
     }
 };
 
@@ -43,7 +41,6 @@ export default function layout(children: JSX.Element): JSX.Element {
             <div style={ styles.content}>
                 {children}
             </div>
-
         </div>
     );
 }

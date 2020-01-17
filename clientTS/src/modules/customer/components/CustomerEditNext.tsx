@@ -1,14 +1,16 @@
 import React, { useEffect, useState, ChangeEvent } from 'react';
 
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { ICustomer, ISelectItem } from 'src/model/types';
+import { ICustomer } from 'src/model/types';
 import { showCustomersRoute } from 'src/modules/routes';
+
+import confirm from "src/components/confirmDialog";
 
 const useStyles = makeStyles({
     root: {
@@ -109,14 +111,19 @@ const CustomerEditNext: React.FC<IComponentProps> = (props: IComponentProps): JS
             return;
         }
 
-        console.log('handleDelete [customerId] ', props.customerId);
-        props.deleteCustomer(props.customerId).then((success) => {
-            console.log('handleDelete [success] ', success);
+        confirm('Really?').then(() => {
+            console.log('proceed!') ;
+            props.customerId &&
+            props.deleteCustomer(props.customerId).then((success: boolean) => {
+                console.log('handleDelete [success] ', success);
+                if (success) {
+                    props.history.push(showCustomersRoute());
+                }
+            });
 
-            if (success) {
-                props.history.push(showCustomersRoute());
-            }
-        });
+          }, () => {
+            console.log('cancel!');
+          });
     }
 
     const handleCancel = () => {
@@ -160,4 +167,4 @@ const CustomerEditNext: React.FC<IComponentProps> = (props: IComponentProps): JS
     );
 }
 
-export default withRouter(CustomerEditNext);
+export default  withRouter(CustomerEditNext);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -13,23 +13,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 
-import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
-
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
 import moment from 'moment'
 
-
-//import { ICustomer } from 'src/model/types';
-//import { ICustomer } from '@app-model-types';
-import { ICustomer, ISelectItem } from 'src/model/types';
+import { ICustomer } from 'src/model/types';
 import { withNamespaces, WithNamespaces } from 'react-i18next';
 
 import { addCustomerRoute, editCustomerRoute } from 'src/modules/routes';
-
-//import i18n from './../../../locales/i18n';
-//import { prependOnceListener } from 'cluster';
 
 const formatDate = (date: any) => {
     return moment(date) //.locale(locale)
@@ -84,7 +73,6 @@ const useStyles = makeStyles({
 });
 
 interface iProps {
-
     loading: boolean,
     customers: Array<ICustomer> | undefined,
     loadData: () => void,
@@ -179,6 +167,4 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
 
 }
 
-//export default CustomerListNext;
-//export default withNamespaces()(withRouter(CustomerListNext));
 export default withRouter(CustomerListNext);

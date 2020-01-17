@@ -41,6 +41,9 @@ NEXT CHALLENGEs:
 - zkusit implementovat API v GoLang (dát do nové části 'API_GO')
 - zahrnout testy do API i Clienta (Jest, Cypress, ... ?)
 
+- notifications
+- localizations
+
 Path aliases nastavit v ts.config: 
 "paths": {
       //"@app-model-types": ["src/model/types"],
