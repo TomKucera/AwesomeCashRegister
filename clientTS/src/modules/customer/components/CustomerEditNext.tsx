@@ -12,6 +12,8 @@ import { showCustomersRoute } from 'src/modules/routes';
 
 import confirm from "src/components/confirmDialog";
 
+import i18n from "src/locales/i18n";    //move to wrapper
+
 const useStyles = makeStyles({
     root: {
         marginTop: "20px"
@@ -111,7 +113,7 @@ const CustomerEditNext: React.FC<IComponentProps> = (props: IComponentProps): JS
             return;
         }
 
-        confirm('Really?').then(() => {
+        confirm(i18n.t("customer.confirmationDelete")).then(() => {
             console.log('proceed!') ;
             props.customerId &&
             props.deleteCustomer(props.customerId).then((success: boolean) => {
@@ -144,8 +146,8 @@ const CustomerEditNext: React.FC<IComponentProps> = (props: IComponentProps): JS
         return (<h1>. . . editing . . .</h1>);
     };
 
-    const label: string = props.customerId ? "Customer edit" : "Customer new";
-
+    const label: string = props.customerId ? i18n.t("customer.labelEdt") : i18n.t("customer.labelNew");
+    
     return (
         <div className={classes.div}>
             <label className={classes.label}>{label}</label>
@@ -155,11 +157,11 @@ const CustomerEditNext: React.FC<IComponentProps> = (props: IComponentProps): JS
                 </Fab>
             }
             <form className={classes.root} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Name" placeholder="name of customer" variant="outlined" margin="normal" value={name} onChange={handleNameChange} fullWidth />
+                <TextField id="outlined-basic" label={i18n.t("customer.name")} placeholder={i18n.t("customer.namePlaceholder")} variant="outlined" margin="normal" value={name} onChange={handleNameChange} fullWidth />
             </form>
             <div className={classes.divButtons}>
-                <Button className={classes.button} variant="outlined" color="primary" onClick={handleSave} disabled={!enableSave()} >Save</Button>
-                <Button className={classes.button} variant="outlined" onClick={handleCancel}>Cancel</Button>
+                <Button className={classes.button} variant="outlined" color="primary" onClick={handleSave} disabled={!enableSave()} >{i18n.t("action.save")}</Button>
+                <Button className={classes.button} variant="outlined" onClick={handleCancel}>{i18n.t("action.cancel")}</Button>
             </div>
             {renderLoading()}
             {renderEditing()}

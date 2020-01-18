@@ -5,6 +5,10 @@ import LanguageDetector from 'i18next-browser-languagedetector'
 //import intervalPlural from 'i18next-intervalplural-postprocessor'
 import XHR from 'i18next-xhr-backend'
 import moment from 'moment'
+
+import enTexts from "./en";
+import csTexts from "./cs";
+
 /*
 declare var BUILD_NUMBER: string
 
@@ -41,33 +45,31 @@ const optionsPrev = {
     debug: true //process.env.NODE_ENV !== 'production',
 };
 
-const options = {
-    
+*/
+
+import i18n, { InitOptions } from "i18next";
+import { reactI18nextModule } from "react-i18next";
+
+const options: InitOptions = {
+    debug: true,
+    lng: "cs",
+    resources: {
+        en: { translation: { ...enTexts } },
+        cs: { translation: { ...csTexts } }
+    },
+    react: {
+        wait: true,
+    },
 };
 
 i18n
     .use(XHR)
     .use(LanguageDetector)
     //.use(intervalPlural)
-    .init(options);
+    .init(options, function (err, t) {
+        let textCustomers = i18n.t('customers');
+        console.log("i18n options", options);
+        console.log("i18n textCustomers", textCustomers);
+    });
 
-export default i18n;
-*/
-
-import i18n from "i18next";
-import { reactI18nextModule } from "react-i18next";
-/*
-i18n
-  .use(<any>reactI18nextModule)
-  .init({
-  fallbackLng: "en",
-  load: "languageOnly",
-  ns: ["common"],
-  defaultNS: "common",
-  react: {
-    wait: true,
-    nsMode: "default"
-  }
-});
-*/
 export default i18n;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withI18n, WithI18n } from 'react-i18next';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -16,9 +17,12 @@ import AddIcon from '@material-ui/icons/Add';
 import moment from 'moment'
 
 import { ICustomer } from 'src/model/types';
-import { withNamespaces, WithNamespaces } from 'react-i18next';
+import { withNamespaces, WithNamespaces , I18nextProviderProps } from 'react-i18next';
 
 import { addCustomerRoute, editCustomerRoute } from 'src/modules/routes';
+
+import i18n from "src/locales/i18n";    //move to wrapper
+
 
 const formatDate = (date: any) => {
     return moment(date) //.locale(locale)
@@ -35,18 +39,18 @@ interface iColumn {
 
 const columns: Array<iColumn> = [
     { id: 'id', label: 'ID', minWidth: 25 },
-    { id: 'name', label: 'Name', minWidth: 150 },
-    { id: 'login', label: 'Login', minWidth: 75 },
+    { id: 'name', label: i18n.t("customer.name") , minWidth: 150 },
+    { id: 'login', label: i18n.t("customer.login"), minWidth: 75 },
     {
         id: 'created',
-        label: 'Created',
+        label: i18n.t("auditable.created"),
         minWidth: 75,
         align: 'right',
         format: (value: any) => formatDate(value),
     },
     {
         id: 'updated',
-        label: 'Updated',
+        label: i18n.t("auditable.updated"),
         minWidth: 75,
         align: 'right',
         format: (value: any) => formatDate(value),
@@ -86,6 +90,8 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [load, setLoad] = React.useState<boolean>(true);
 
+    console.log("i18n", i18n);
+
     React.useEffect(() => {
         if (load) {
             props.loadData();
@@ -113,7 +119,7 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
 
     return (
         <div className={classes.div}>
-            <label className={classes.label}>Customers</label>
+            <label className={classes.label}>{i18n.t("customers")}</label>
             <Fab className={classes.fab} size="small" color="primary" aria-label="add" onClick={handleAdd}>
                 <AddIcon />
             </Fab>
@@ -167,4 +173,4 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
 
 }
 
-export default withRouter(CustomerListNext);
+export default  withRouter(CustomerListNext);
