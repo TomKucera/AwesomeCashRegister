@@ -16,12 +16,13 @@ const styles = {
 };
 
 const themeOptions: ThemeOptions = {
+    /*
     palette: {
         type: 'light',
         primary: lightGreen,
         secondary: green,
     },
-
+*/
 };
 const theme = createMuiTheme(themeOptions);
 

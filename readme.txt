@@ -41,8 +41,10 @@ NEXT CHALLENGEs:
 - zkusit implementovat API v GoLang (dát do nové části 'API_GO')
 - zahrnout testy do API i Clienta (Jest, Cypress, ... ?)
 
-- notifications
-- localizations
+- notifications (validace zákazníka na unikátní `login`)
+- localizations [https://www.i18next.com/overview/getting-started] (npm install i18next --save)
+- moment (npm install i18next --save)
+
 
 Path aliases nastavit v ts.config: 
 "paths": {
@@ -53,3 +55,17 @@ Path aliases nastavit v ts.config:
 Zasílání emailů z BE:
 - npm install nodemailer
 - https://www.w3schools.com/nodejs/nodejs_email.asp
+
+
+MATERIAL UI:  
+[https://material-ui.com/getting-started/installation/]
+- npm install @material-ui/core
+- npm install @material-ui/icons
+
+-> typescript types [https://www.npmjs.com/package/@types/material-ui]
+-> npm install --save @types/material-ui
+
+
+REDUX: perzistence [https://github.com/reactjs/react-router-redux]
+-> react-router-redux
+-> npm install --save react-router-redux
