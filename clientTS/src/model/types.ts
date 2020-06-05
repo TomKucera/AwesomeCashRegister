@@ -8,3 +8,5 @@ export enum layoutType {
     admin,
     license,
 }
+
+export * from "./IVdfLocation";

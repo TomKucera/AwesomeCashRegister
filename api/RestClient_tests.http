@@ -1,0 +1,17 @@
+GET https://example.com/comments/1 HTTP/1.1
+
+###
+
+POST http://localhost:9000/testAPI/vodafone/location HTTP/1.1
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+address=Lazarsk
+
+###
+
+POST http://localhost:9000/testAPI/vodafone/location HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{ "address": "Lazarsk" }

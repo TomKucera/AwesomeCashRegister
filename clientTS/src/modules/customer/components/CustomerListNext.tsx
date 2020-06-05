@@ -23,6 +23,9 @@ import { addCustomerRoute, editCustomerRoute } from 'src/modules/routes';
 
 import i18n from "src/locales/i18n";    //move to wrapper
 
+import { loadLocations } from './../../vodafone/store/LocationActions';
+
+
 
 const formatDate = (date: any) => {
     return moment(date) //.locale(locale)
@@ -96,6 +99,7 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
         if (load) {
             props.loadData();
             setLoad(false);
+            loadLocations("Lazar").then(locations => {console.log("locations", locations)});
         }
     }, [load, props.loadData]);
 
