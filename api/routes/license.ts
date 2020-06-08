@@ -1,6 +1,6 @@
 
 import express from "express";
-import license from "./../data/model/license";
+import { License } from "./../data/model/types";
 import licenseRepository from "./../data/repository/LicenseRepository";
 import { tryPromise } from "tarn/lib/utils";
 // tslint:disable: object-literal-sort-keys
@@ -19,7 +19,7 @@ router.post("/:idCustomer/", (req, res) => {
 router.get("/:id", (req, res) => {
   console.log("license getById [req.params]: ", req.params);
   const id = parseInt(req.params.id, 10);
-  licenseRepository.GetById(id).then((licenseData: license) => {
+  licenseRepository.GetById(id).then((licenseData: License) => {
     res.status(200).send(licenseData);
   });
 });

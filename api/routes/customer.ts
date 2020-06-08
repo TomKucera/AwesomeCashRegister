@@ -1,6 +1,6 @@
 
 import express from "express";
-import customer from "./../data/model/customer";
+import { Customer } from "./../data/model/types";
 import customerRepository from "./../data/repository/CustomerRepository";
 
 // import license from "./../data/model/license";
@@ -36,7 +36,7 @@ router.put("/:id", (req, res) => {
 router.get("/:id", (req, res) => {
   console.log("customer getById [req.params]: ", req.params);
   const id = parseInt(req.params.id, 10);
-  customerRepository.GetById(id).then((customerData: customer) => {
+  customerRepository.GetById(id).then((customerData: Customer) => {
     console.log("customer put [customerData]: ", customerData);
     res.status(200).send(customerData);
   });

@@ -1,5 +1,5 @@
 // import knex from "knex";
-import mLicense from "./../../data/model/license";
+import { License as mLicense } from "./../../data/model/types";
 import connection from "./connection";
 // tslint:disable: object-literal-sort-keys
 

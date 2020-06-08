@@ -33,7 +33,7 @@ const getOptionsKnex = (db: string) => {
     return options;
 };
 
-const getConnection = (db: string) => {
+const getConnection = (db: string): knex => {
     const options = getOptionsKnex(db);
     console.log("getConnection [db, options]: ", db, options);
     return knex(options);

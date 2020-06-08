@@ -1,6 +1,6 @@
 
 import express from "express";
-import user from "./../data/model/user";
+import { User } from "./../data/model/types";
 import userRepository from "./../data/repository/UserRepository";
 // tslint:disable: object-literal-sort-keys
 
@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
 
 router.get("/:id", (req, res) => {
   const id = parseInt(req.params.id, 10);
-  const userData: user = new user();
+  const userData: User = new User();
   userData.id = id;
   userData.email = id.toString();
   return res.status(200).send({
@@ -45,7 +45,7 @@ router.post("/", (req, res) => {
   */
 
   const userEmail = req.body.email;
-  const userData: user = { id: 0, email: userEmail, created: new Date(), updated: new Date() };
+  const userData: User = { id: 0, email: userEmail, created: new Date(), updated: new Date() };
 
   userRepository.Create(userData).then(() => {
     res.status(201).send({

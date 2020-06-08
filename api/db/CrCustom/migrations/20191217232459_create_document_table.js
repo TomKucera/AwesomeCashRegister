@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('document', function (table) {
         //table.increments();

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('license', function (table) {
         table.increments('id').primary();

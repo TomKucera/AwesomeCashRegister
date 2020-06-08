@@ -1,5 +1,5 @@
 import dataSet from "./../../db/CrMaster/customer";
-import Customer from "./../model/customer";
+import { Customer } from "./../model/types";
 import ICustomerRepository from "./interface/ICustomerRepository";
 
 const CustomerRepository: ICustomerRepository = {

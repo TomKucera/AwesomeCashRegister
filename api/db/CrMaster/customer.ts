@@ -1,7 +1,7 @@
 // tslint:disable: ordered-imports
 import connection from "./connection";
 import connectionCustom from "./../CrCustom/connection";
-import mCustomer from "./../../data/model/customer";
+import { Customer as mCustomer } from "./../../data/model/types";
 
 class Customer {
     public static create(login: string, name: string, password: string): Promise<mCustomer> {

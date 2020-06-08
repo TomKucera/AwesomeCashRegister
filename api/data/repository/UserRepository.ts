@@ -1,4 +1,4 @@
-import User from "./../model/user";
+import { User } from "./../model/types";
 import IUserRepository from "./interface/IUserRepository";
 
 const UserRepository: IUserRepository = {

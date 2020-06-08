@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 exports.up = function(knex) {
     return knex.schema.table('customer', function(t) {
         t.boolean('isDeleted').notNull().defaultTo(false);

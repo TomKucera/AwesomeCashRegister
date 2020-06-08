@@ -1,5 +1,5 @@
 import dataSet from "./../../db/CrMaster/license";
-import License from "./../model/license";
+import { License } from "./../model/types";
 import ILicenseRepository from "./interface/ILicenseRepository";
 
 const LicenseRepository: ILicenseRepository = {
@@ -7,7 +7,7 @@ const LicenseRepository: ILicenseRepository = {
     GetById: (id: number): Promise<License> => {
         return new Promise<License>((resolve, reject) => {
             dataSet.getById(id).then((row) => {
-                resolve(row);
+                resolve(row as License);
             });
         });
     },
@@ -16,7 +16,7 @@ const LicenseRepository: ILicenseRepository = {
         return new Promise<License>((resolve, reject) => {
             console.log("Create license ", data);
             dataSet.create(data).then((row) => {
-                resolve(row);
+                resolve(row  as License);
             });
         });
     },
@@ -36,7 +36,7 @@ const LicenseRepository: ILicenseRepository = {
     GetList: (): Promise<License[]> => {
         return new Promise<License[]>((resolve, reject) => {
             dataSet.getList().then((rows) => {
-                resolve(rows);
+                resolve(rows as License[]);
             });
         });
     },
@@ -44,7 +44,7 @@ const LicenseRepository: ILicenseRepository = {
     GetByCustomerId: (customerId: number): Promise<License[]> => {
         return new Promise<License[]>((resolve, reject) => {
             dataSet.getByCustomerId(customerId).then((rows) => {
-                resolve(rows);
+                resolve(rows as License[]);
             });
         });
     },
