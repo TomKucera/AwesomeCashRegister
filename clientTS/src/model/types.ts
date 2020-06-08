@@ -1,3 +1,5 @@
+export interface IStringMap<TVal> { [key: string]: TVal; };
+
 import i_customer from "./ICustomer";
 import i_SelectItem from "./common/ISelectItem";
 

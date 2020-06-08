@@ -16,15 +16,17 @@ import AddIcon from '@material-ui/icons/Add';
 
 import moment from 'moment'
 
-import { ICustomer } from 'src/model/types';
-import { withNamespaces, WithNamespaces , I18nextProviderProps } from 'react-i18next';
+import { ICustomer, ISelectItem } from 'src/model/types';
+import { locationToSelectItem } from 'src/model/typesExtensions';
+
+import { withNamespaces, WithNamespaces, I18nextProviderProps } from 'react-i18next';
 
 import { addCustomerRoute, editCustomerRoute } from 'src/modules/routes';
 
 import i18n from "src/locales/i18n";    //move to wrapper
 
 import { loadLocations } from './../../vodafone/store/LocationActions';
-
+import MySelector from './../../../components/selector/index';
 
 
 const formatDate = (date: any) => {
@@ -42,7 +44,7 @@ interface iColumn {
 
 const columns: Array<iColumn> = [
     { id: 'id', label: 'ID', minWidth: 25 },
-    { id: 'name', label: i18n.t("customer.name") , minWidth: 150 },
+    { id: 'name', label: i18n.t("customer.name"), minWidth: 150 },
     { id: 'login', label: i18n.t("customer.login"), minWidth: 75 },
     {
         id: 'created',
@@ -99,7 +101,6 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
         if (load) {
             props.loadData();
             setLoad(false);
-            loadLocations("Lazar").then(locations => {console.log("locations", locations)});
         }
     }, [load, props.loadData]);
 
@@ -121,13 +122,24 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
         props.history.push(addCustomerRoute());
     };
 
+    const locsLoad = (searchText?: string): Promise<ISelectItem[]> => {
+        return new Promise<ISelectItem[]>(async (resolve) => {
+            const locations = await loadLocations(searchText);
+            const selectItems = locations.map(l => locationToSelectItem(l));
+            resolve(selectItems);
+        });
+    };
+
+    const locsChange = (value?: ISelectItem): void => {
+        console.log('locsChange ', value);
+    };
+    
     return (
         <div className={classes.div}>
             <label className={classes.label}>{i18n.t("customers")}</label>
             <Fab className={classes.fab} size="small" color="primary" aria-label="add" onClick={handleAdd}>
                 <AddIcon />
             </Fab>
-
             <Paper className={classes.root}>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
@@ -172,9 +184,12 @@ const CustomerListNext: React.FC<IComponentProps> = (props: IComponentProps): JS
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </Paper>
+            <div style={{width: '100%'}}>
+                <MySelector load={locsLoad} onChange={locsChange}/>
+            </div>
         </div>
     );
 
 }
 
-export default  withRouter(CustomerListNext);
+export default withRouter(CustomerListNext);
