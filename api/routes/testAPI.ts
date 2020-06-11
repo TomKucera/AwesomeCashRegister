@@ -24,6 +24,7 @@ router.get("/vodafone/location", (req, res) => {
 
 router.post("/vodafone/location", (req, res) => {
   vodafoneRepository.getByAddress(req.body.address).then((locations) => {
+    console.table(locations.map(l => { return {ID: l.id, Address: l.address} }));
     res.status(201).send(locations);
   });
 });

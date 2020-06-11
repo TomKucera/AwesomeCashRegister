@@ -15,3 +15,21 @@ Accept: application/json
 Content-Type: application/json
 
 { "address": "Lazarsk" }
+ 
+###
+
+POST http://localhost:9000/users/google/login HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{ "authorizationCode": "code" }
+
+###
+
+POST http://localhost:9000/users/google/login HTTP/1.1
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+authorizationCode=code
+
+

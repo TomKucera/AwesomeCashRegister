@@ -69,3 +69,9 @@ MATERIAL UI:
 REDUX: perzistence [https://github.com/reactjs/react-router-redux]
 -> react-router-redux
 -> npm install --save react-router-redux
+
+GOOGLE auth [https://developers.google.com/adwords/api/docs/guides/authentication]
+
+INSTALL TIPS (from project 'budget'):
+- import { Injectable } from '@nestjs/common';
+- import { ConfigService } from '@nestjs/config';

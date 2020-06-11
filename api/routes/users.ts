@@ -2,12 +2,13 @@
 import express from "express";
 import { User } from "./../data/model/types";
 import userRepository from "./../data/repository/UserRepository";
-// tslint:disable: object-literal-sort-keys
+
+import GoogleAuthService from './../services/GoogleAuthService';
 
 const router = express.Router();
 
 // GET home page.
-router.get("/", (req, res, next) => {
+router.get("/", (req, res) => {
   // res.render("respond with a resource");
   userRepository.GetById(req.body.id).then((userData) => {
     res.status(201).send(userData);
@@ -64,4 +65,26 @@ router.post("/", (req, res) => {
 
 });
 
+router.post("/google/login", (req, res) => {
+  console.log("/google/login [authorizationCode]", req.body.authorizationCode);
+
+  //const gacTest = new GoogleAuthService(new ConfigService(config));
+  const gac = new GoogleAuthService();
+  gac.getTokens(req.body.authorizationCode).then(tokens => {
+    console.log("getTokens tokens", tokens);
+    if (tokens.access_token) {
+      gac.getUserBasicData(tokens.access_token, tokens.refresh_token || undefined).then(userData => {
+        console.log("getUserBasicData userData", userData);
+      }).catch(reason => {
+        console.log("getUserBasicData reason", reason);
+      });
+    }
+  }).catch(reason => {
+    console.log("getTokens reason", reason);
+  });
+
+  res.status(201).send(req.body.authorizationCode);
+});
+
 export default router;
+

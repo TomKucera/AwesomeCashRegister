@@ -8,6 +8,9 @@ import { App } from './App';
 import { UserList } from './UserList';
 import { CustomerList } from './modules/customer/containers/CustomerList';
 import { CustomerEdit } from './modules/customer/containers/CustomerEdit';
+import Login from './modules/user/containers/Login';
+import LoginCallback from './modules/user/components/LoginCallback';
+
 import layout  from './layouts/layotAdmin';
 
 import * as serviceWorker from './serviceWorker';
@@ -19,6 +22,22 @@ const customerCreate = (props: RouteComponentProps<any, any, any>) => layout(<Cu
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
+            <Switch>
+                <Route
+                    exact
+                    path='/login'
+                    //render={(props) => layout(<CustomerList {...props} />)}
+                    render={(props) => <Login {...props} />}
+                />
+            </Switch>
+            <Switch>
+                <Route
+                    exact
+                    path='/login/callback'
+                    //render={(props) => layout(<CustomerList {...props} />)}
+                    render={(props) => <LoginCallback {...props} />}
+                />
+            </Switch>
             <Switch>
                 <Route
                     exact
