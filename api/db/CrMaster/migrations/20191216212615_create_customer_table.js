@@ -1,21 +1,17 @@
 /* eslint-disable no-undef */
-
-exports.up = function (knex, Promise) {
-    return knex.schema.createTable('customer', function (table) {
-        //table.increments();
-        //table.increments('id').primary();
-        //table.bigInteger('id');
-        table.increments('id', 10).primary();
-        table.string('name', 100).notNullable();
-        table.string('regId', 20).notNullable();
-        table.string('taxId', 20).notNullable();
-        table.string('login', 20).notNullable();
-        table.string('password', 20).notNullable();
-        table.timestamp('created').defaultTo(knex.fn.now());
-        table.timestamp('updated').defaultTo(knex.fn.now());
+exports.up = knex => {
+    return knex.schema.createTable('customer', t => {
+        t.increments('id', 10).primary();
+        t.string('name', 100).notNullable();
+        t.string('regId', 20).notNullable();
+        t.string('taxId', 20).notNullable();
+        t.string('login', 20).notNullable();
+        t.string('password', 20).notNullable();
+        t.timestamp('created').notNullable().defaultTo(knex.fn.now());
+        t.timestamp('updated').notNullable().defaultTo(knex.fn.now());
     })
 }
 
-exports.down = function (knex, Promise) {
+exports.down = knex => {
     return knex.schema.dropTable('customer');
 }

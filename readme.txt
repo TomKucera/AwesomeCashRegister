@@ -16,6 +16,8 @@ Knex:
 - https://gist.github.com/NigelEarle/70db130cc040cc2868555b29a0278261
 - knex migrate:make create_users_table
 - knex migrate:latest
+- knex migrate:rollback
+- knex migrate:rollback all
 
 Node.js upgrade: stáhnout a nainstalovat nový Node.js ... https://nodejs.org/en/download/releases/
 
