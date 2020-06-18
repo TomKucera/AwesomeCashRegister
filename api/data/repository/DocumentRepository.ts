@@ -36,4 +36,4 @@ const DocumentRepository: IDocumentRepository = {
     },
 };
 
-export default UserRepository;
+export default DocumentRepository;

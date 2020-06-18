@@ -1,5 +1,8 @@
 
 import express from "express";
+
+import {ParamsDictionary} from "express-serve-static-core";
+
 import { Customer } from "./../data/model/types";
 import customerRepository from "./../data/repository/CustomerRepository";
 
@@ -7,6 +10,12 @@ import customerRepository from "./../data/repository/CustomerRepository";
 import licenseRepository from "./../data/repository/LicenseRepository";
 
 import { send } from "./../common/post";
+
+import GoogleAuthService from './../modules/auth/services/google-auth-service';
+import AuthService from './../modules/auth/services/auth-service';
+import { request } from "http";
+
+const authService = new AuthService(new GoogleAuthService());
 
 // tslint:disable: object-literal-sort-keys
 
@@ -50,7 +59,11 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-router.get("/", (req, res, next) => {
+
+//router.get("/", authService.authenticateJWT, (req, res) => {
+router.get("/", (req, res) => {
+  //const reqest: express.Request<ParamsDictionary, any, any> = undefined;
+  
   console.log("customer getList [req.params]: ", req.params);
   customerRepository.GetList().then((customers) => {
     res.status(201).send(customers);

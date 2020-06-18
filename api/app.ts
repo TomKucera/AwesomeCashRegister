@@ -14,6 +14,11 @@ import licenseRouter from "./routes/license";
 
 import db from "./db/db";
 
+import GoogleAuthService from './modules/auth/services/google-auth-service';
+import AuthService from './modules/auth/services/auth-service';
+
+const authService = new AuthService(new GoogleAuthService());
+
 db.init.then();
 
 const app = express();
@@ -33,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
+app.use("/", authService.authenticateJWT);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/customer", customerRouter);

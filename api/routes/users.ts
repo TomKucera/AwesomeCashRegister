@@ -1,9 +1,9 @@
-
 import express from "express";
 import { User } from "./../data/model/types";
 import userRepository from "./../data/repository/UserRepository";
 
-import GoogleAuthService from './../services/GoogleAuthService';
+import GoogleAuthService from './../modules/auth/services/google-auth-service';
+import AuthService from './../modules/auth/services/auth-service';
 
 const router = express.Router();
 
@@ -46,7 +46,7 @@ router.post("/", (req, res) => {
   */
 
   const userEmail = req.body.email;
-  const userData: User = { id: 0, email: userEmail, created: new Date(), updated: new Date() };
+  const userData: User = { id: 0, email: userEmail, firstName: '', lastName: '', created: new Date(), updated: new Date() };
 
   userRepository.Create(userData).then(() => {
     res.status(201).send({
@@ -68,22 +68,27 @@ router.post("/", (req, res) => {
 router.post("/google/login", (req, res) => {
   console.log("/google/login [authorizationCode]", req.body.authorizationCode);
 
-  //const gacTest = new GoogleAuthService(new ConfigService(config));
-  const gac = new GoogleAuthService();
-  gac.getTokens(req.body.authorizationCode).then(tokens => {
-    console.log("getTokens tokens", tokens);
-    if (tokens.access_token) {
-      gac.getUserBasicData(tokens.access_token, tokens.refresh_token || undefined).then(userData => {
-        console.log("getUserBasicData userData", userData);
-      }).catch(reason => {
-        console.log("getUserBasicData reason", reason);
-      });
-    }
-  }).catch(reason => {
-    console.log("getTokens reason", reason);
-  });
+  const authorizationCode = req.body.authorizationCode;
 
-  res.status(201).send(req.body.authorizationCode);
+  if (!authorizationCode) {
+    res.status(400).send({ code: 'bbb', message: 'No authorization code provided' });
+    return;
+  }
+
+  const authService = new AuthService(new GoogleAuthService());
+
+  authService.loginUser(authorizationCode)
+    .then((user: User | undefined) => {
+      if (user) {
+        res.status(201).send(user);
+      }
+      else {
+        res.status(404).send({ code: 'aaa', message: 'User not found' });
+      }
+    })
+    .catch((reason: unknown) => {
+      res.status(500).send({ error: reason });
+    });
 });
 
 export default router;

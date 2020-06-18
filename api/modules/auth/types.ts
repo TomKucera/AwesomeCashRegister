@@ -16,13 +16,3 @@ export interface IGoogleUserInfo {
     accessToken: string;
     refreshToken?: string;
 }
-
-export interface ILogin {
-    id: number,
-    firstName: string,
-    lastName: string,
-    email: string,
-    accessToken: string,
-    refreshToken: string,
-    picture?: string,
-}

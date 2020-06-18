@@ -15,6 +15,8 @@ const GoogleAuth: IGoogleAuth = {
     redirectUrl: process.env.GOOGLE_AUTH_REDIRECT_URL || '',
 };
 
+console.log("config.GoogleAuth ", GoogleAuth);
+
 export default {
     GoogleAuth,
 };

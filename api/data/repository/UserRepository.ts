@@ -5,7 +5,7 @@ const UserRepository: IUserRepository = {
 
     GetById: (id: number): Promise<User> => {
         return new Promise<User>((resolve, reject) => {
-            resolve({ id, email: "", created: new Date(), updated: new Date() });
+            resolve({ id, email: "", firstName: '', lastName:'', created: new Date(), updated: new Date() });
         });
     },
 
