@@ -1,22 +1,41 @@
+import { ThunkDispatch } from 'redux-thunk';
+import { UserActions, IUserActionTypes, IFinishAuthenticate } from './UserTypes';
+import { IAction } from './../../shared/store/SharedTypes';
+import { IUser } from './../../../model/types';
+import apiUser from './../../../api/user';
 
-// import { IVdfLocation } from '../../../model/types';
-// import { createDispatchHook } from 'react-redux';
+const getActionStartAuthenticate = (): IAction => {
+    return {
+        type: UserActions.START_AUTHENTICATE,
+    };
+};
 
-export function googleLogin(authorizationCode?: string) {
-    return new Promise<string>(async (resolve) => {
+const getActionFinishAuthenticate = (user?: IUser, serverError?: any): IFinishAuthenticate => {
+    return {
+        type: UserActions.FINISH_AUTHENTICATE,
+        user,
+        serverError 
+    };
+}
+
+export function googleLogin(authorizationCode: string) {
+    return async (dispatch: ThunkDispatch<{}, {}, IUserActionTypes>): Promise<void> => {
+        dispatch(getActionStartAuthenticate())
         try {
-            console.log('googleLogin');
-            const url = 'http://localhost:9000/users/google/login';
-            const headers = {
-                'Content-Type': 'application/json'
-            };
-            const body = { authorizationCode };
-            const response = await fetch(url, { method: 'POST', body: JSON.stringify(body), headers });
-            //const locations: IVdfLocation[] = await response.json();
-            console.log('googleLogin response', response);
-            resolve("");
+            const user = await apiUser.googleLogin(authorizationCode);
+            console.log("UserActions.googleLogin user", user);
+            dispatch(getActionFinishAuthenticate(user, undefined));
         } catch (error) {
-            console.log("googleLogin error", error);
+            dispatch(getActionFinishAuthenticate(undefined, error));
         }
+    };
+};
+
+export function logOUT(): Promise<void> {
+    return new Promise<void>(async (resolve) => {
+        // TODO: logOut
+        //await store.dispatch(getActionUpdateToken(undefined, undefined, undefined));
+        //await store.dispatch({ type: userActions.CLEAR_USER });
+        resolve();
     });
 };

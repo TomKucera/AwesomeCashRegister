@@ -34,9 +34,18 @@ const mapDispatchToProps: MapDispatchToProps<
     IDispatchProps,
     IOwnProps
 > = (dispatch: ThunkDispatch<{}, {}, AnyAction>, ownProps: IOwnProps) => ({
+    /*
     loginGoogle: (authorizationCode: string):Promise<boolean> => {
         return new Promise<boolean>(async (resolve) => {
             const result = await googleLogin(authorizationCode);
+            console.log("Login loginGoogle result", result);
+            resolve(true);
+        });
+    }
+    */
+    loginGoogle: (authorizationCode: string):Promise<boolean> => {
+        return new Promise<boolean>(async (resolve) => {
+            const result = await dispatch(googleLogin(authorizationCode));
             console.log("Login loginGoogle result", result);
             resolve(true);
         });

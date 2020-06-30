@@ -1,14 +1,14 @@
 export interface IStringMap<TVal> { [key: string]: TVal; };
 
-import i_customer from "./ICustomer";
-import i_SelectItem from "./common/ISelectItem";
-
-export type ICustomer = i_customer;
-export type ISelectItem = i_SelectItem;
-
 export enum layoutType {
     admin,
     license,
 }
+
+export * from "./common/SelectItem";
+export * from "./common/notification";
+
+export * from "./Customer";
+export * from "./IUser";
 
 export * from "./IVdfLocation";

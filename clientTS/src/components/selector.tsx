@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select, MenuItem, Input, InputLabel } from '@material-ui/core';
 
-import ISelectItem from './../model/common/ISelectItem';
+import { ISelectItem } from '../model/types';
 
 /*
 const CenterContent = styled.div`

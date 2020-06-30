@@ -5,6 +5,7 @@ GET https://example.com/comments/1 HTTP/1.1
 POST http://localhost:9000/testAPI/vodafone/location HTTP/1.1
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
+Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTU5Mjk0NTg4MiwiZXhwIjoxNTkyOTQ5NDgyfQ.C7-Los-Dy8CLAGKKjQi5mvbJTAEg5dSkcGRwUrCz5t0'
 
 address=Lazarsk
 
@@ -32,4 +33,19 @@ Content-Type: application/x-www-form-urlencoded
 
 authorizationCode=code
 
+###
 
+GET http://localhost:9000/users/google/login HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{ "authorizationCode": "4/1AEIJCyfa1NLieVWwH9M3VCBKXF_dz7bOl_hi79nqq2g2RneMRmIZliKZnMFGamgjpc2WW_cL4kOrVktxC8rV74" }
+
+###
+
+POST http://localhost:9000/license/4 HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTU5Mjk4NzI0MywiZXhwIjoxNTkyOTkwODQzfQ.Yk0B9wQn7qlNOaJ7sLlU2ted2EBWH8Pk3Z4qktjiDJ0
+
+{ "name": "License test", "description": "desc" }

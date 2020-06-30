@@ -77,3 +77,5 @@ GOOGLE auth [https://developers.google.com/adwords/api/docs/guides/authenticatio
 INSTALL TIPS (from project 'budget'):
 - import { Injectable } from '@nestjs/common';
 - import { ConfigService } from '@nestjs/config';
+
+Dependency injection: inversity.js

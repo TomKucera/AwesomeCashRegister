@@ -33,8 +33,8 @@ class Customer {
             console.log("edit customer before [customer] ", customer);
             connection("customer").where("id", customer.id).update({
                 name: customer.name,
-                login: customer.login,
-                password: customer.password,
+                //login: customer.login,
+                //password: customer.password,
                 updated: connection.fn.now(),
             }).then((count) => {
                 console.log("edit customer [customer, rows] ", customer, count);

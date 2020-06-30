@@ -1,77 +1,73 @@
 
 import express from "express";
-import { License } from "./../data/model/types";
-import licenseRepository from "./../data/repository/LicenseRepository";
-import { tryPromise } from "tarn/lib/utils";
-// tslint:disable: object-literal-sort-keys
+//import { License } from "./../data/model/types";
+import LicenseService from "./../modules/license/services/license-service";
 
 const router = express.Router();
+
+const licenseService: LicenseService = new LicenseService();
 
 router.post("/:idCustomer/", (req, res) => {
   // res.render("respond with a resource");
   const idCustomer = parseInt(req.params.idCustomer, 10);
-  console.log("license post [req, idCustomer]: ", req, idCustomer);
-  licenseRepository.Create({ ...req.body, idCustomer }).then((licenseData) => {
-    res.status(201).send(licenseData);
+  const idUser = (req as any).userId as number;
+
+  licenseService.create(idUser, { ...req.body, idCustomer }).then(result => {
+    res.status(201).send(result);
+  });
+});
+
+///orders/{id}/lines/{id}
+
+router.post("/:id/user", (req, res) => {
+  const idUser = (req as any).userId as number;
+  const id = parseInt(req.params.id, 10);
+
+  console.log("route.post.user idUser, id, body", idUser, id, req.body);
+
+  licenseService.addUser(idUser, id, req.body).then(result => {
+    res.status(201).send(result);
+  });
+});
+
+router.delete("/:id/user/:email", (req, res) => {
+  const idUser = (req as any).userId as number;
+  const id = parseInt(req.params.id, 10);
+  const email = req.params.email;
+
+  console.log("route.delete.user idUser, id, email", idUser, id, email);
+
+  licenseService.removeUser(idUser, id, email).then(result => {
+    res.status(201).send(result);
+  });
+});
+
+router.put("/:id", (req, res) => {
+  const idUser = (req as any).userId as number;
+  const id = parseInt(req.params.id, 10);
+
+  console.log("route.put idUser, id", idUser, id);
+
+  licenseService.update(idUser, { ...req.body, id }).then(result => {
+    res.status(201).send(result);
   });
 });
 
 router.get("/:id", (req, res) => {
-  console.log("license getById [req.params]: ", req.params);
   const id = parseInt(req.params.id, 10);
-  licenseRepository.GetById(id).then((licenseData: License) => {
-    res.status(200).send(licenseData);
+  const idUser = (req as any).userId as number;
+
+  licenseService.get(idUser, id).then(result => {
+    res.status(201).send(result);
   });
 });
 
-router.get("/", (req, res, next) => {
-  console.log("license getList [req.params]: ", req.params);
-  licenseRepository.GetList().then((licenses) => {
-    res.status(201).send(licenses);
+router.get("/", (req, res) => {
+  const idUser = (req as any).userId as number;
+
+  licenseService.getAll(idUser).then(result => {
+    res.status(201).send(result);
   });
 });
-
-/*
-// GET home page.
-router.get("/", (req, res, next) => {
-  // res.render("respond with a resource");
-  licenseRepository.GetById(req.body.id).then((licenseData) => {
-    res.status(201).send(licenseData);
-  });
-
-});
-
-router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const licenseData: license = new license();
-  licenseData.id = id;
-  licenseData.email = id.toString();
-  return res.status(200).send({
-    success: "true",
-    message: "todo retrieved successfully",
-    licenseData,
-  });
-});
-*/
-//// tslint:disable-next-line: no-shadowed-variable
-
-  /*
-  else if (!req.body.description) {
-    return res.status(400).send({
-      success: "false",
-      message: "description is required"
-    });
-  }
-  */
-
-  /*
-    return res.status(201).send({
-     success: "true",
-     message: "license added successfully",
-     licenseEmail,
-   });
-   */
-
-// });
 
 export default router;

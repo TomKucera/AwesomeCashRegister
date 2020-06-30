@@ -1,21 +1,11 @@
 
 import express from "express";
 
-import {ParamsDictionary} from "express-serve-static-core";
-
 import { Customer } from "./../data/model/types";
 import customerRepository from "./../data/repository/CustomerRepository";
-
-// import license from "./../data/model/license";
 import licenseRepository from "./../data/repository/LicenseRepository";
 
 import { send } from "./../common/post";
-
-import GoogleAuthService from './../modules/auth/services/google-auth-service';
-import AuthService from './../modules/auth/services/auth-service';
-import { request } from "http";
-
-const authService = new AuthService(new GoogleAuthService());
 
 // tslint:disable: object-literal-sort-keys
 
@@ -23,8 +13,6 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   console.log("customer post [req]: ", req);
-
-  //status(201)
   customerRepository.Create(req.body).then((customerData) => {
     console.log("customer post [customerData]: ", customerData);
     res.status(201).send(customerData);
@@ -59,11 +47,7 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-
-//router.get("/", authService.authenticateJWT, (req, res) => {
 router.get("/", (req, res) => {
-  //const reqest: express.Request<ParamsDictionary, any, any> = undefined;
-  
   console.log("customer getList [req.params]: ", req.params);
   customerRepository.GetList().then((customers) => {
     res.status(201).send(customers);
@@ -78,52 +62,5 @@ router.get("/:id/licenses", (req, res) => {
     res.status(200).send(licenses);
   });
 });
-
-// /1/documents
-
-/*
-// GET home page.
-router.get("/", (req, res, next) => {
-  // res.render("respond with a resource");
-  customerRepository.GetById(req.body.id).then((customerData) => {
-    res.status(201).send(customerData);
-  });
-
-});
-
-router.get("/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const customerData: customer = new customer();
-  customerData.id = id;
-  customerData.email = id.toString();
-  return res.status(200).send({
-    success: "true",
-    message: "todo retrieved successfully",
-    customerData,
-  });
-});
-*/
-//// tslint:disable-next-line: no-shadowed-variable
-
-  /*
-  else if (!req.body.description) {
-    return res.status(400).send({
-      success: "false",
-      message: "description is required"
-    });
-  }
-  */
-
-  
-  
-  /*
-    return res.status(201).send({
-     success: "true",
-     message: "customer added successfully",
-     customerEmail,
-   });
-   */
-
-//});
 
 export default router;

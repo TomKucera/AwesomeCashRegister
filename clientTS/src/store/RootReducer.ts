@@ -1,12 +1,10 @@
 import { combineReducers, Reducer } from 'redux';
-import { IUser } from "./user/UserTypes";
-import { INITIAL_STATE_USER, userReducer } from './user/UserReducer';
 
+import { IStoreUser, INITIAL_STATE_USER, userReducer } from './../modules/user/store/UserReducer';
 import { IStoreCustomer,  INITIAL_STATE_CUSTOMER, customerReducer } from './../modules/customer/store/CustomerReducer'  //eslint-disable-line
 
-
 export interface IAppState {
-    user: IUser,
+    user: IStoreUser,
     customer: IStoreCustomer,
 }
 

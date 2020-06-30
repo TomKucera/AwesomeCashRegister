@@ -108,7 +108,7 @@ const CustomerEditNext: React.FC<IComponentProps> = (props: IComponentProps): JS
     }; 
 
     const handleDelete = () => {
-        if (props.customerId == undefined) {
+        if (props.customerId === undefined) {
             alert('Invalid operation');
             return;
         }

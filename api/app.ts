@@ -12,14 +12,13 @@ import usersRouter from "./routes/users";
 import customerRouter from "./routes/customer";
 import licenseRouter from "./routes/license";
 
-import db from "./db/db";
-
 import GoogleAuthService from './modules/auth/services/google-auth-service';
 import AuthService from './modules/auth/services/auth-service';
 
-const authService = new AuthService(new GoogleAuthService());
+//import db from "./db/db";
+//db.init.then();
 
-db.init.then();
+const authService = new AuthService(new GoogleAuthService());
 
 const app = express();
 
@@ -40,7 +39,7 @@ app.use(bodyParser.raw());
 
 app.use("/", authService.authenticateJWT);
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/user", usersRouter);
 app.use("/customer", customerRouter);
 app.use("/license", licenseRouter);
 app.use("/testAPI", testAPIRouter);

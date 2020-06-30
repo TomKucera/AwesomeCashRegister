@@ -65,8 +65,8 @@ router.post("/", (req, res) => {
 
 });
 
-router.post("/google/login", (req, res) => {
-  console.log("/google/login [authorizationCode]", req.body.authorizationCode);
+router.post("/googleLogin", (req, res) => {
+  console.log("/googleLogin [authorizationCode]", req.body.authorizationCode);
 
   const authorizationCode = req.body.authorizationCode;
 

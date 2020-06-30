@@ -5,7 +5,7 @@ import { store } from './store';
 import { BrowserRouter, RouteComponentProps, Route, Switch } from 'react-router-dom';
 import './index.css';
 import { App } from './App';
-import { UserList } from './UserList';
+//import { UserList } from './UserList';
 import { CustomerList } from './modules/customer/containers/CustomerList';
 import { CustomerEdit } from './modules/customer/containers/CustomerEdit';
 import Login from './modules/user/containers/Login';
@@ -45,6 +45,7 @@ ReactDOM.render(
                     render={(props) => <App userType='admin' username='h4x0r' {...props} />}
                 />
             </Switch>
+            {/*
             <Switch>
                 <Route
                     exact
@@ -52,6 +53,7 @@ ReactDOM.render(
                     render={(props) => <UserList {...props} />}
                 />
             </Switch>
+            */}
             <Switch>
                 <Route
                     exact

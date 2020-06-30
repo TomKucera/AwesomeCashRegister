@@ -23,9 +23,12 @@ const Login: React.FC<IComponentProps> = (props: IComponentProps): JSX.Element =
             return;
         }
 
+        console.log("loginGoogle [code]", code);
+        
         props.loginGoogle(code).then( success => {
             console.log("loginGoogle [success]", success);
         });
+        
     };
 
     const onFailure = (error: any): void => {

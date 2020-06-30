@@ -9,8 +9,8 @@ class License {
         return new Promise<mLicense>((resolve, reject) => {
             connection("license").insert({
                 idCustomer: license.idCustomer,
-                licenseCode: license.licenseCode,
-                licenseKey: license.licenseKey,
+                //licenseCode: license.licenseCode,
+                //licenseKey: license.licenseKey,
             }).then((rows) => {
                 console.log("Create license rows ", rows);
                 if (rows.length === 1) {

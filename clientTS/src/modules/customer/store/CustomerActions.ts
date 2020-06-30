@@ -5,7 +5,7 @@ import {
 import { ThunkDispatch } from 'redux-thunk';
 
 import { ICustomer } from './../../../model/types';
-//import { createDispatchHook } from 'react-redux';
+import apiCustomer from './../../../api/customer';
 
 export function getActionStartLoadCustomers(): ICustomerActionTypes {
     return {
@@ -63,25 +63,19 @@ export function getActionFinishDelete(id: number, serverError?: any): ICustomerA
     };
 }
 
-
 export function loadCustomers() {
     return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<void> => {
-        return new Promise<void>(async (resolve) => {
-            dispatch(getActionStartLoadCustomers())
-            try {
-                console.log('loadCustomers');
-                const url = 'http://localhost:9000/customer/';
-                const response = await fetch(url, {
-                    method: 'GET',
-                });
-                const customers = await response.json();
-                dispatch(getActionFinishLoadCustomers(customers, undefined));
-            } catch (error) {
-                dispatch(getActionFinishLoadCustomers(undefined, error));
-            }
-        });
+        dispatch(getActionStartLoadCustomers())
+        try {
+            const customers = await apiCustomer.getList();
+            console.log("CustomerActions.loadCustomers customers", customers);
+            dispatch(getActionFinishLoadCustomers(customers, undefined));
+        } catch (error) {
+            dispatch(getActionFinishLoadCustomers(undefined, error));
+        }
     };
 };
+
 
 export function loadCustomer(customerId: number) {
     return async (dispatch: ThunkDispatch<{}, {}, ICustomerActionTypes>): Promise<void> => {

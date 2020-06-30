@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormControl } from '@material-ui/core';
 
-import { ICustomer } from './../../../model/types';
+import { ICustomer, ISelectItem } from './../../../model/types';
 import Selector from './../../../components/selector';
-import ISelectItem from './../../../model/common/ISelectItem';
 
 import { customerToSelectItem } from 'src/model/common/convert';
 

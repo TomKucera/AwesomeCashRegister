@@ -1,5 +1,5 @@
 import express from "express";
-import vodafoneRepository from "./../dbVodafone/data";
+import vodafoneRepository from "../dbVDF/data";
 
 const router = express.Router();
 

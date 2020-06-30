@@ -30,13 +30,17 @@ class User {
         return new Promise<mUser>((resolve, reject) => {
             connection("user").where("email", email).then((rows) => {
                 if (rows.length === 1) {
-                    resolve(rows[0]);
+                    const user = rows[0]; 
+                    delete user.picture;
+                    resolve(user);
                 } else {
                     reject(rows);
                 }
             });
         });
     }
+
+   
 }
 
 export default User;

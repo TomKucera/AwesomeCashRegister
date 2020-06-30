@@ -11,7 +11,7 @@ export default class GoogleAuthService {
             Config.GoogleAuth.clientId,
             Config.GoogleAuth.secret,
             Config.GoogleAuth.redirectUrl,
-        );
+        );  
     }
     
     async getTokens(code: string): Promise<IGoogleAuthCredentials> {
